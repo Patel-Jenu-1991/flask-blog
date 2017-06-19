@@ -10,3 +10,14 @@ from the same screen, read the entries themselves,
 or log out.
 
 That's it.
+
+Files and Directories:
+
+1. blog.py - all of the logic (Python/Flask code)
+goes into this file.
+
+2. static - this directory holds static files
+(anything that is not dynamic) like JavaScript
+files, CSS stylesheets, and images.
+
+3. templates - houses all the HTML files.
