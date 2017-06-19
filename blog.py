@@ -19,4 +19,16 @@ app.config.from_object(__name__)
 def connect_db():
     return sqlite3.connect(app.config['DATABASE'])
 
+# maps the url / to the function login()
+# which in turn sets the route to login.html
+@app.route('/')
+def login():
+    return render_template('login.html')
+
+# maps the url /main to the function main()
+# which in turn sets the route to main.html
+@app.route('/main')
+def main():
+    return render_template('main.html')
+
 if __name__ == "__main__": app.run(debug=True)
