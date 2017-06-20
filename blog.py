@@ -69,7 +69,7 @@ def logout():
 def add():
     title = request.form['title']
     post = request.form['post']
-    if not title or not posts:
+    if not title or not post:
         # if the provided fields are empty
         flash("All fields are required. Please try again.")
         return redirect(url_for('main'))
