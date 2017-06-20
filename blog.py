@@ -3,8 +3,7 @@
 # blog.py - controller
 
 # imports
-from flask import Flask, render_template, request, session, \
-    flash, redirect, url_for, g
+from flask import Flask, render_template, request, session, flash, redirect, url_for, g
 import sqlite3
 
 # configuration
@@ -17,8 +16,7 @@ PASSWORD = 'admin'
 # for example:
 # import os
 # os.urandom(24) # generates a random string of 24 chars, hard to guess
-SECRET_KEY =
-\x1ef\xf9\xb2\x0e\xa0\xda\xab\xc7\xbc7\x89\x8a\xaf\xba\x1fT\x86Qo?\xbc,\xa1
+SECRET_KEY = b'\x94xt\x19>ra\xf6\r%\xa0%\xd6_\x92i\xb0\xc1\xa7\xf8\xdf9\x99\xf7'
 
 app = Flask(__name__)
 
@@ -36,7 +34,7 @@ def login():
     error = None
     status_code = 200
     if request.method == 'POST':
-        if request.form['username'] != app.config['USERNAME'] or
+        if request.form['username'] != app.config['USERNAME'] or \
         request.form['password'] != app.config['PASSWORD']:
             error = 'Invalid Credentials. Please try again.'
             status_code = 401
