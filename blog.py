@@ -50,7 +50,7 @@ def login():
         if request.form['username'] != app.config['USERNAME'] or \
         request.form['password'] != app.config['PASSWORD']:
             error = 'Invalid Credentials. Please try again.'
-            status_code = 401
+            status_code = 401   # 401 - not authorized
         else:
             session['logged_in'] = True
             return redirect(url_for('main'))
