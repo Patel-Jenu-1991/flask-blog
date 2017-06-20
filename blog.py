@@ -63,6 +63,25 @@ def logout():
     flash('You were logged out')
     return redirect(url_for('login'))
 
+# Adding the ability to add new posts to the blog for users
+@app.route('/add', methods=['POST'])
+@login_required
+def add():
+    title = request.form['title']
+    post = request.form['post']
+    if not title or not posts:
+        # if the provided fields are empty
+        flash("All fields are required. Please try again.")
+        return redirect(url_for('main'))
+    else:
+        g.db = connect_db()
+        g.db.execute('INSERT INTO posts (title, post) values (?, ?)',
+        [request.form['title'], request.form['post']])
+        g.db.commit()
+        g.db.close()
+        flash("New entry was successfully posted!")
+        return redirect(url_for('main'))
+
 # maps the url /main to the function main()
 # which in turn sets the route to main.html
 @app.route('/main')
