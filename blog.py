@@ -5,6 +5,7 @@
 # imports
 from flask import Flask, render_template, request, session, \
 flash, redirect, url_for, g
+from functools import wraps
 import sqlite3
 
 # configuration
@@ -23,6 +24,17 @@ app = Flask(__name__)
 
 # pulls in app configuration by looking for UPPERCASE variables
 app.config.from_object(__name__)
+
+# function for requiring user authentication
+def login_required(test):
+    @wraps(test)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return test(*args, **kwargs)
+        else:
+            flash('You need to log in first.')
+            return redirect(url_for('login'))
+    return wrap
 
 # function used for connecting to the database
 def connect_db():
@@ -54,6 +66,7 @@ def logout():
 # maps the url /main to the function main()
 # which in turn sets the route to main.html
 @app.route('/main')
+@login_required
 def main():
     return render_template('main.html')
 
